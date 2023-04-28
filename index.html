@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/57603a9424.js" crossorigin="anonymous"></script>
+    <title>Min startsida</title>
+</head>
+<body>
+
+    <button id="apiSettings"><i class="fa-solid fa-gear"></i><div id="checksLocalStorage"></p></button>
+
+    <div id="main" class="grid-container">
+
+
+
+        <div id="ipdiv" class="grid-item">
+            <p id="iptitle">This is your ip:</p>
+            <p id="myip"></p>
+        </div>
+        
+        <div id="jokediv" class="grid-item">
+            <p id="joketitle">Funny joke:</p>
+            <p id="joke"></p>
+        </div>
+
+        <div id="boreddiv" class="grid-item">
+            <p id="boredtitle">Bored? Try this:</p>
+            <p id="bored"></p>
+        </div>
+
+        <div id="weatherdiv" class="grid-item">
+            <image id="weathericon" src="?"></image>
+            <p id = "location"></p>
+            <p id="weather"></p>
+
+        </div>
+
+        <div id="chatdiv" class="grid-item">
+            <p id="chattitle">Ask me about something:</p>
+            <input type="text" id="chat" onchange="getChatGPT()">
+        </div>
+
+        <div id="chatResponse" class="grid-item">
+            <p id="chatResponse"></p>
+        </div>
+
+
+        <script src="scripts.js"></script>
+
+    </div>
+
+    <button id="clearStorage" onclick=clearLocalStorage()>Debug: clear local storage</button>
+
+</body>
+</html>

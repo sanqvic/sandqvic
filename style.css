@@ -1,0 +1,52 @@
+#main {
+
+
+    text-align: center;
+  }
+
+#chatResponse {
+    border-radius: 25px;
+    background: #96d83b;
+  }
+
+  #jokediv{
+    float: right;
+  }
+
+  #ipdiv {
+    float: left;
+  }
+
+  #weathericon{
+    float: right;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    row-gap: 50px;
+  }
+
+  .grid-item{
+    margin: auto;
+
+    border-radius: 25px;
+    background: #73AD21;
+    padding: 20px;
+    width: 200px;
+    height: 150px;
+  }
+
+  #iptitle, #joketitle, #boredtitle, #chattitle {
+    	text-align: left;
+        border-radius: 25px;
+        background: #96d83b;
+        padding: 20px;
+
+  }
+
+  #location{
+    border-radius: 25px;
+    background: #96d83b;
+  }
