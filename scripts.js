@@ -197,6 +197,22 @@ getChatGPT = async () => {
 
 }
 
+async function getTodoList(){
+    const resp = await fetch("http://128.214.253.222:8371/todo");
+
+    const respJson = await resp.json();
+
+    console.log(respJson);
+
+    // for (room of respJson.rooms) {
+    //     document.querySelector('#room').innerHTML += `
+    //         <option value="${room.id}">${room.room_number}: ${room.room_type}</li>
+    //     `;
+    // }
+}
+
+getTodoList();
+
 getIP();
 checkLocalStorage();
 getJokes();
