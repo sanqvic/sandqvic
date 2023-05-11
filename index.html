@@ -11,7 +11,7 @@
     <title>Min startsida</title>
 </head>
 <body>
-
+  
     <button id="apiSettings"><i class="fa-solid fa-gear"></i><div id="checksLocalStorage"></p></button>
 
     <div id="main" class="grid-container">
@@ -45,13 +45,30 @@
             <input type="text" id="chat" onchange="getChatGPT()">
         </div>
 
-        <div id="chatResponse" class="grid-item">
+        <div id="chatResponseGrid" class="grid-item">
             <p id="chatResponse"></p>
         </div>
 
         <div id="todolist" class="grid-item">
-            <p id="todotitle">Todo...</p>
+            <p id="todo">To Do</p>
+            <ul></ul>
         </div>
+
+        <div id="addToDo" class="grid-item">
+
+            
+            <p>Add To Do</p>
+            Due <input type="date" id="due-date" value = "2023-05-10"><br>
+            Title <textarea id="title"></textarea><br>
+            Detail <textarea id="info"></textarea><br>
+            Done <textarea id="done">false</textarea><br>
+
+            <input type="button" id="save-todo" value="save"><br>
+            <input type="button" id="update-todo" value="update" style="display:none"><br>
+
+        </div>
+
+        
 
 
         <script src="scripts.js"></script>

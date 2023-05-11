@@ -2,7 +2,13 @@
 
 
     text-align: center;
+
   }
+
+  p {
+    font-size: 30px;
+  }
+  
 
 #chatResponse {
     border-radius: 25px;
@@ -34,8 +40,8 @@
     border-radius: 25px;
     background: #73AD21;
     padding: 20px;
-    width: 200px;
-    height: 150px;
+    width: 400px;
+    height: 300px;
   }
 
   #iptitle, #joketitle, #boredtitle, #chattitle {

@@ -197,6 +197,16 @@ getChatGPT = async () => {
 
 }
 
+getIP();
+checkLocalStorage();
+getJokes();
+getBored();
+
+
+///NEXT IS TO DO STUFF
+
+//get full list of ToDos
+//displays title and details of todo entry
 async function getTodoList(){
     const resp = await fetch("http://128.214.253.222:8371/todo");
 
@@ -204,16 +214,159 @@ async function getTodoList(){
 
     console.log(respJson);
 
-    // for (room of respJson.rooms) {
-    //     document.querySelector('#room').innerHTML += `
-    //         <option value="${room.id}">${room.room_number}: ${room.room_type}</li>
-    //     `;
-    // }
+    for (entry of respJson.todo) {
+
+        // let doneIcon = "Mark as done";
+        // if(entry.done){
+        //     doneIcon = "<i class='fa-solid fa-check'></i>"
+        // }
+
+        document.querySelector('ul').innerHTML += `
+            <li>
+            ${entry.title} <button id="doneToDo" onclick=editToDo('${entry.id}')>Update</button>
+            <br>
+            ${entry.info} <button id="deleteToDo" onclick=deleteToDo('${entry.id}')>x</button>
+            <br>
+            ${entry.due_date}
+            <br>
+            ${entry.done}
+            </li>
+        `;
+    }
+}
+
+let editID = "";
+
+async function editToDo(id){
+    //gets a todo entry, and fills the text fields with the existing data
+
+    editID = id;
+
+    const resp = await fetch("http://128.214.253.222:8371/todo/" + id);
+
+    const respJson = await resp.json();
+
+    console.log(respJson.message.title);
+
+    document.getElementById('title').value = respJson.message.title;
+    document.getElementById('info').value = respJson.message.info;
+    //document.getElementById('date').value = new Date();
+    document.getElementById('done').value = respJson.message.done;
+
+    document.getElementById('save-todo').style.display = "none";
+
+
+    document.getElementById('update-todo').style.display = "block";
+
+
+
+
+//     document.querySelector('title').innerHTML += `
+//     <li>
+//     ${respJson.message.title} <button id="doneToDo" onclick=doneToDo('${respJson.message.id}')>Update</button>
+//     <br>
+//     ${respJson.message.info} <button id="deleteToDo" onclick=editToDo('${respJson.message.id}')>x</button>
+//     <br>
+//     ${respJson.message.due_date}
+//     <br>
+//     ${respJson.message.done}
+//     </li>
+// `;
 }
 
 getTodoList();
 
-getIP();
-checkLocalStorage();
-getJokes();
-getBored();
+async function newToDo(todo){
+
+    const resp= await fetch("http://128.214.253.222:8371/todo", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(todo)
+    })
+
+    const respJSON = await resp.json();
+    console.log(respJSON);
+
+    window.location.reload();
+
+}
+
+async function deleteToDo(id){
+
+    const urlstring = "http://128.214.253.222:8371/todo/" + id;
+    console.log(urlstring);
+
+    const resp= await fetch(urlstring, {
+        method: 'DELETE',
+    })
+
+    const respJSON = await resp.json();
+    console.log(respJSON);
+
+    window.location.reload();
+
+}
+
+async function modToDo(todo){
+
+    const urlstring = "http://128.214.253.222:8371/todo/" + editID;
+    console.log(urlstring);
+
+    console.log(JSON.stringify(todo));
+
+    const resp= await fetch(urlstring, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(todo)
+    })
+
+    const respJSON = await resp.json();
+    console.log(respJSON);
+
+    window.location.reload();
+}
+
+
+
+document.querySelector('#save-todo').addEventListener('click', () => {
+    const todo = {
+            title: document.querySelector('#title').value,
+            due_date: document.querySelector('#due-date').value,
+            info: document.querySelector('#info').value
+    }
+
+    newToDo(todo);
+
+    console.log(todo);
+});
+
+
+
+
+document.querySelector('#update-todo').addEventListener('click', () => {
+
+
+    let boolString = document.querySelector("#done").value; 
+    let boolValue = (boolString.toLowerCase() === "true"); 
+    console.log(boolValue); // true
+
+    console.log(document.querySelector('#title').value);
+    console.log(document.querySelector('#due-date').value);
+
+    console.log(document.querySelector('#info').value);
+
+
+
+    const todo = {
+            done: boolValue,
+            title: document.querySelector('#title').value,
+            due_date: document.querySelector('#due-date').value,
+            info: document.querySelector('#info').value
+    }
+
+    console.log(todo);
+
+    modToDo(todo);
+
+
+});
